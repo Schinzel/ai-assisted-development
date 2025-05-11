@@ -5,7 +5,7 @@ The purpose of this document is to describe the problem and the solution to an A
 # Instructions
 
 * Implement one task at a time  
-* Follow the code standard. Read the file README.mb in the project root and follow its links to understand the project, the stack, code standard and how testing is to be done.  
+* Follow the code standard. Read the file README.md in the project root and follow its links to understand the project, the stack, code standard and how testing is to be done.  
 * Explain your approach for each task  
 * When you are done with a task   
   * run below commands to verify that things still work  
@@ -21,7 +21,7 @@ The purpose of this document is to describe the problem and the solution to an A
 
 # User story
 
-As a \[specific user role/persona\]  
+As a \[specific user role or persona\]  
 I want \[clear, specific capability\]  
 So that \[concrete business/user benefit\]
 

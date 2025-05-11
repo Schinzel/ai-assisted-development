@@ -35,13 +35,13 @@ One should have a very good reason to go above 120 chars.
 
 ### Numbers
 For readability use thousand-separator for numerical values 10 000 and larger. 
-That is user 129_690_289 instead of 129690289. 
+That is use 129_690_289 instead of 129690289. 
 This does not apply to ids. 
 This applies to numerical data types and not strings.
 
 ## Code
 ### Interfaces
-Extensively use interfaces to define clear contracts and decouple components. Explicit interface contracts with strong typing and validation requirements. 🔒
+Extensively use interfaces to define clear contracts and decouple components. Explicit interface contracts with strong typing and validation requirements.
 - Since AI might implement functions differently than expected, well-defined interfaces with clear input/output requirements ensure architectural boundaries remain intact regardless of implementation details.
 - Every public interface or abstract class defining a significant unit of behavior must have a comprehensive contract test suite that rigorously verifies adherence to its documented purpose and constraints, independent of any specific implementation.
 
@@ -66,7 +66,7 @@ interface UserRegistrationPort {
 ```
 
 ### Immutability
-Favor Immutability (for the sake of AIs):
+Favor immutability for better code predictability:
 - Use immutable collection like Kotlin's immutable collections, Java's Collections.unmodifiable*, or libraries like Guava/Vavr
 - Avoid mutable variables (var in Kotlin, non-final fields/variables in Java)
 - Avoid side effects within functions and classes

@@ -27,7 +27,7 @@ Use an AI assistant such as Claude desktop to refine the instructions for an AI 
 
 * *You are not to change any code in the project.*  
 * *Do not add code to the document.*   
-* *Suggest one change in the document at the time.*   
+* *Suggest one change in the document at a time.*   
 * *For each suggestion, explain the suggestion and ask if you should do any changes in TASK.md*"
 
 ## **3 Code changes**

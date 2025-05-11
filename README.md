@@ -11,7 +11,7 @@ It provides structured guidance for leveraging AI assistants to enhance producti
 
 ### Code Standards
 [Code Standards Overview](./doc/code_standards/code_standards_overview.md) - Code standards for the project.
-If this is the code standard is used in several projects it should be in its own repository and add to different projects as a git subtree or submodule. 
+If this code standard is used in several projects, it should be in its own repository and added to different projects as a git subtree or submodule. 
 
 ### Project Organization
 [Project Description](./doc/project_description/project_description.md) - Example of how to document project architecture for both humans and AI
