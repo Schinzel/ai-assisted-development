@@ -3,4 +3,4 @@
 
 # IntelliJ
 *.iml
-!.idea
+.idea/
