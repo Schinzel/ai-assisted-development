@@ -11,7 +11,7 @@ The purpose of this page is to provide a guide for how to work effectively with 
 * Add the instructions to the project as a markdown file, for example TASK.md. 
 You can write the instructions in Google Doc and when you are happy with them export to markdown.
 The reason you want them in a markdown file is so that 1\) an AI assistant can improve the document and 2\) an AI agent can easily read and add to the document. 
-I have created a template for [TASK.md](./template_TASK.md). Feel free to improve on this template file.
+I have created a template for [TASK.md](./template_TASK.md).
 
 ## **2 Improve instructions**
 
