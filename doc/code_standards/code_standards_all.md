@@ -13,6 +13,24 @@ A function:
 - Performs ONE well defined task
 - Has 10 lines of code or less, excluding comments
 
+## In Code Documentation
+- All classes, interfaces, files start with "The purpose of this [class/interface/...] is to [...]"
+  - This helps create a concise explanation of what a class does
+  - It forces an explanation of why, rather than what
+- **Comment placement**: Write comments ABOVE the line of code, never after (except for rare cases with short repetitive declarations where inline makes more sense)
+- **Comment density**: Aim for one comment line per line of meaningful code
+- **Explain WHY not WHAT**: Focus on business logic, decisions, and non-obvious implementations
+- Document so that when you return six months later you are happy with yourself
+- We use US English
+
+Example:
+```kotlin
+// Calculate daily drift from annual trend strength
+val dailyDrift = trend.strength / 100.0 / 252.0
+// Apply geometric Brownian motion with market trend influence  
+val newPrice = currentPrice * exp(dailyDrift + volatility * randomShock)
+```
+
 ## Line length
 Most lines should be 80 chars or shorter.
 81-120 chars in rare circumstances. 
@@ -25,7 +43,7 @@ One should have a very good reason to go above 120 chars.
 | Class      | PascalCase                  | `MyLogger`                                |
 | Interface  | PascalCase with `I` prefix  | `IFileStorage`                            |
 | Function   | camelCase                   | `registerUser()`                          |
-| Variable   | snake_case                  | `recipe_name`                             |
+| Variable   | camelCase                   | `recipeName`                              |
 | Constant   | UPPER_SNAKE_CASE            | `MAX_RETRIES`                             |
 | Package    | snake_case                  | `my_project.sites.admin.pages.admin_user` |
 | Enum Class | PascalCase with suffix enum | `UnitEnum`                                |
@@ -74,15 +92,39 @@ Favor immutability for better code predictability:
 ### Defensive Programming
 Use defensive programming:
 - Fail fast: Detect problems early, as close to the source as possible
+- Prefer exceptions over nulls: Functions should throw exceptions rather than return null/optional types when data isn't found
 - Validate inputs: Never assume arguments or data are valid — check them
 - Check assumptions: If your code assumes a condition is true (e.g., a dependency is initialized), make that assumption explicit and enforced
 - Handle edge cases: Nulls, empty lists, timeouts, division by zero, etc.
 - Isolate failures: Don't let one bad input or bug take down the whole system
 - Add guardrails: For example, require(), check(), assert(), or fallback logic
 
+### Type Design
+Always use meaningful domain types instead of generic container types like `Pair`, `Triple`, or `Map<String, Any>`.
+
+**✅ Correct:**
+```kotlin
+data class CustomerLifecycle(
+    val joinDate: LocalDate,
+    val departureDate: LocalDate,
+    val status: String
+)
+
+fun generateCustomerLifecycle(): CustomerLifecycle
+```
+
+**❌ Avoid:**
+```kotlin
+fun generateCustomerLifecycle(): Triple<LocalDate, LocalDate, String>
+fun getUserInfo(): Pair<String, Int>
+```
+
+Benefits: Self-documenting code, type safety, better maintainability, and meaningful IDE auto-completion.
+
 ### Avoid Cleverness
-- The cleverer the code, the less likely the AI is to understand it on first pass
-- Go for clarity over elegance unless you can explain it easily in a prompt
+- The cleverer the code, the harder it is to understand and maintain
+- Prioritize clarity over elegance unless the solution can be easily explained
+- Write code that others (including your future self) can quickly comprehend
 
 ## Naming
 - Variables, classes, functions and files should have self-explanatory names
@@ -90,12 +132,3 @@ Use defensive programming:
 - Data classes - suffix with Dto
 - Objects that are stored in the database - suffix with Dbo
 - Data access classes or objects - suffix with Dao
-
-## Documentation
-- All classes, interfaces, files and so on start with "The purpose of this [class/interface/...] is to [...]"
-  - This helps create a concise explanation of what a class does
-  - It forces an explanation of why, rather than what
-- One line of code = (roughly) one line of documentation
-- Document so that when you return to the documentation six months from now that you are happy with yourself
-- Documentation outside the code should be to the point and maintainable
-- We use US English

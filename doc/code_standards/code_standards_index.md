@@ -6,9 +6,8 @@ This document serves as the central reference point for all code standards in th
 
 For detailed standards, please refer to the following documents:
 
-- [General Code Standards](code_standards_all.md) - Core standards for all developers
-- [Module Standards](module_standards.md) - Guidelines for module creation and maintenance
+- [Code Standards all](code_standards_all.md) - Core standards for all developers
+- [Code Standards for AIs](code_standards_ais.md) - Additional standards for AI-assisted development
 - [Testing Standards](testing_standards.md) - Testing principles and practices
-- [AI Standards](ai_standards.md) - Additional standards for AI-assisted development
 
 All developers and AIs working on the project must adhere to these standards.

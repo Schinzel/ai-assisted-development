@@ -3,7 +3,7 @@
 ## General Testing Principles
 - Extensive unit tests
 - A unit test function should test only one thing
-- One assert per unit test function
+- One assertThat per unit test function
 - Use AssertJ for assertions instead of JUnit's built-in assertions
   - AssertJ provides more readable and descriptive test failures
   - See examples in the AssertJ Usage section below
@@ -13,6 +13,7 @@
 - Ensure edge cases are covered (null values, empty collections, boundary conditions)
 - Be careful to test only what you intend to test — in other words, test as little as possible
   - For example: if you want to test an API method, move the logic to a separate function or class, so the logic can be tested without involving the web server
+- Single point of truth for testing - Each behavior should be tested in exactly one place
 - Unit test classes do not have to declare "The purpose of this class..."
 
 ## Naming Conventions
@@ -23,7 +24,7 @@
 - A utility class used in tests, located in the test package, is named: `[Something]Util`
 
 ### Functions
-Test method names should follow this pattern:
+Test method names **MUST** follow this exact pattern:
 ```
 unitOfWork_StateUnderTest_ExpectedBehavior
 ```
@@ -33,6 +34,32 @@ If longer descriptions or non-ASCII characters are needed:
 `unit of work _ state under test _ expected behavior`
 ```
 
+If the unit of work tested is the constructor, write that explicitly.
+For example:
+```
+`constructor _ valid asset class _ creates object with correct id`
+```
+
+### Function Naming Examples (Required for Claude Code)
+
+**✅ Correct Examples:**
+```kotlin
+@Test
+fun constructor_zeroAssetCount_throwsIllegalArgumentException()
+
+@Test
+fun getColumnNames_defaultConfiguration_returnsCorrectColumnNames()
+
+@Test
+fun `has more rows _ all assets generated _ returns false`()
+```
+
+**Naming Components:**
+- **unitOfWork**: Exact method name (`getColumnNames`, `hasMoreRows`) or `constructor`
+- **StateUnderTest**: Input scenario (`defaultConfiguration`, `zeroAssetCount`, `validAssetClass`)
+- **ExpectedBehavior**: Expected outcome (`returnsCorrectColumnNames`, `throwsIllegalArgumentException`, `returnsTrue`)
+
+
 ## Nested Test Classes
 With JUnit 5, you can use nested classes to organize tests. If you have many tests for one unit-of-work, you can group them in a nested class:
 
@@ -40,92 +67,68 @@ With JUnit 5, you can use nested classes to organize tests. If you have many tes
 @Nested
 inner class UnitOfWork {
     @Test
-    fun stateUnderTest1_ExpectedBehavior1{
-        [...]
+    fun stateUnderTest1_ExpectedBehavior1(){
+        //...
     }
     
     @Test
-    fun stateUnderTest2_ExpectedBehavior2{
-        [...]
+    fun stateUnderTest2_ExpectedBehavior2(){
+        //...
     }
 }
 ```
+or
 
-## Interface Testing
-Every public interface or abstract class defining a significant unit of behavior must have a comprehensive contract test suite that rigorously verifies adherence to its documented purpose and constraints, independent of any specific implementation.
+```kotlin
+@Nested
+inner class UnitOfWork {
+    @Test
+    fun `state under test _ expected behavior`(){
+        //...
+    }   
+}
+```
 
 ## AssertJ Usage
+Use AssertJ for more readable assertions and better error messages.
 
-### Overview
-AssertJ provides fluent, readable assertions that make test failures more descriptive and improve test readability.
-
-### Key Points
-- Always use static imports for AssertJ's `assertThat` method: `import static org.assertj.core.api.Assertions.assertThat`
-- Prefer AssertJ's fluent API over JUnit's built-in assertions
-- Take advantage of AssertJ's descriptive failure messages
-
-### Examples
-
-Instead of:
+**Examples:**
 ```kotlin
-// JUnit style
-assertEquals(3, parts.size)
-assertEquals(1, parts[0].length)
-assertTrue(parts[2].endsWith(".jpeg"))
-```
-
-Use:
-```kotlin
-// AssertJ style
+// Instead of JUnit assertEquals/assertTrue
 assertThat(parts).hasSize(3)
-assertThat(parts[0]).hasSize(1)
+assertThat(parts[0]).hasSize(1) 
 assertThat(parts[2]).endsWith(".jpeg")
-```
-
-### String Assertions
-```kotlin
-// Checking string content
-assertThat("hello").isEqualTo("hello")
-assertThat("hello").contains("el")
-assertThat("hello").startsWith("he")
-assertThat("hello").endsWith("lo")
-assertThat("hello").hasSize(5)
-```
-
-### Collection Assertions
-```kotlin
-// For lists, sets, maps
-assertThat(list).hasSize(3)
-assertThat(list).contains("item")
-assertThat(list).containsExactly("a", "b", "c")
-assertThat(list).containsExactlyInAnyOrder("c", "a", "b")
-assertThat(list).doesNotContain("item")
-assertThat(map).containsKey("key")
-```
-
-### Numeric Assertions
-```kotlin
-// For integers, longs, doubles, etc.
-assertThat(42).isEqualTo(42)
-assertThat(42).isGreaterThan(41)
-assertThat(42).isLessThan(43)
-assertThat(42).isBetween(40, 45)
-```
-
-### Boolean Assertions
-```kotlin
-// For booleans
 assertThat(true).isTrue
-assertThat(false).isFalse
-```
+assertThat(list).contains("item")
+assertThat(42).isGreaterThan(41)
 
-### Exception Assertions
-```kotlin
-// For exceptions
+// Exception testing
 assertThatThrownBy { 
-    // code that should throw an exception
+    // code that throws
 }.isInstanceOf(IllegalArgumentException::class.java)
-  .hasMessageContaining("specific message")
 ```
 
-For more examples and advanced usage, refer to the [AssertJ documentation](https://assertj.github.io/doc/).
+## Minimal assertion logic
+In the asserts there should be minimal logic. The only thing that should be able to fail 
+in a test is the test. So all logic outside of the assert. 
+
+That is, I want 
+```kotlin
+val expectedDate = LocalDate.of(2020, 3, 1)
+assertThat(marketTrend.startDate).isEqualTo(expectedDate)
+```
+and not
+```kotlin
+assertThat(marketTrend.startDate).isEqualTo(LocalDate.of(2020, 3, 1))
+```
+
+That is, I want
+```kotlin
+val name = nordicStocks?.name
+assertThat(name).isEqualTo("Nordic stocks")
+```
+and not
+```kotlin
+assertThat(nordicStocks?.name).isEqualTo("Nordic stocks")
+```
+
