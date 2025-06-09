@@ -6,23 +6,23 @@ The purpose of this section is to provide instructions and explain the workflow 
 # Instructions
 
 * Implement one task at a time
-* Follow the code standard. Read the file README.md in the project root and follow its links to understand the 
-project, the stack, code standard and how testing is to be done.
+* Follow the code standard. Read the file README.md in the project root and follow its links to understand the
+  project, the stack, code standard and how testing is to be done.
 * All tasks must follow project standards, use defensive programming principles, and include comprehensive
-unit tests unless explicitly stated otherwise.
+  unit tests unless explicitly stated otherwise.
 
 ## When you are done with a task
-* run below commands to verify that things still work
-  * mvn clean install \-DskipTests
-  * mvn test
+* Run below commands to verify that things work
+  * [nmp build, maven compile and so on]
 * Fill out the *Task Summary (to be completed by AI)* for the task you just completed
   * Be concise and to the point
   * Include major changes made and files affected
   * Document key decisions and their rationale
   * Highlight any items that might affect future tasks
-* Fill out *Current Implementation Status (to be completed by AI)* and add which tasks have been completed. 
+* Fill out *Current Implementation Status (to be completed by AI)* and add which tasks have been completed.
   * Simply add a row with *Task X done - Name of task - YYYY-MM-DD*.
 * Let me know when you've completed a task so I can verify it before moving to the next one
+
 
 ## When you are done with a phase
 * Fill out *Current Phase Status (to be completed by AI)* 

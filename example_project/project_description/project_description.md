@@ -7,7 +7,7 @@ The project helps users to [... explanation of the project. Problem to solve. So
 
 ## Documents
 
-### [Technology Stack](./stack.md)
+### [Technology Stack](stack.md)
 Details the technologies, frameworks, and tools used in the project. This includes programming languages, databases, search technologies, and development tools.
 
 ### [Module Structure](./modules.md)
