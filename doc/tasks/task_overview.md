@@ -13,7 +13,7 @@ The purpose of this section is to provide instructions and explain the workflow 
 
 ## When you are done with a task
 * Run below commands to verify that things work
-  * [nmp build, maven compile and so on]
+  * [npm build, maven compile and so on]
 * Fill out the *Task Summary (to be completed by AI)* for the task you just completed
   * Be concise and to the point
   * Include major changes made and files affected
