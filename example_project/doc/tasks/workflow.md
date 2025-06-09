@@ -15,7 +15,7 @@ The reason you want them in a markdown file is so that:
 2) an AI agent can easily read and add to the document. 
 
 I have created a template for tasks here [template_tasks_phase_N.md](./template_tasks_phase_N.md).
-Link to the task files in [task_overview.md](./task_overview.md)
+Link to the task files in [task_overview.md](task_overview.md)
 
 ## **2 Improve instructions**
 Use an AI assistant such as Claude desktop to refine the instructions for an AI agent.
