@@ -1,3 +1,5 @@
+> **Archived.** This repo is no longer maintained. The current work is in [ai-assisted-development-workflow](https://github.com/Schinzel/ai-assisted-development-workflow) and [ai-assisted-development-stack](https://github.com/Schinzel/ai-assisted-development-stack).
+
 # AI-Assisted Development
 
 A practical guide for implementing AI-assisted development workflows in software teams. 
